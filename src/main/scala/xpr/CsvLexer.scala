@@ -50,11 +50,11 @@ trait CsvLexer extends RegexParsers {
     case x ~ xs => Header((x :: xs).toVector)
   }
 
-  val headLessFile: Parser[HeadlessFile] = ((record ~ rep(CRLF ~> record)) <~ opt(CRLF)) ^^ {
+  val headLessFile: Parser[HeadlessFile] = record ~ rep(CRLF ~> record) /* <~ opt(CRLF) */ ^^ {
     case x ~ xs => HeadlessFile((x :: xs).toVector)
   }
 
-  val headedFile: Parser[HeadedFile] = ((header <~ CRLF) ~ ((record ~ rep(CRLF ~> record)) <~ opt(CRLF))) ^^ {
+  val headedFile: Parser[HeadedFile] = (header <~ CRLF) ~ (record ~ rep(CRLF ~> record)) /* <~ opt(CRLF) */ ^^ {
     case h ~ (x ~ xs) => HeadedFile((x :: xs).toVector, h)
   }
 
