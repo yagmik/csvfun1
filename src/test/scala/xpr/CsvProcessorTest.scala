@@ -91,7 +91,7 @@ class CsvProcessorTest extends AnyFunSuite {
       case Success(_) => false
       case Failure(exception) =>
         exception match {
-          case CsvLexerException(message) =>
+          case _: CsvLexerException =>
             true
           case _ => false
         }
