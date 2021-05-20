@@ -40,7 +40,7 @@ trait CsvProcessor extends CsvLexer {
       .iterator
       .zipWithIndex
       .find(p => p._1.fields.size != firstRecord.size) match {
-      case Some((_, idx)) => idx + add + 1 // first line is file has #1
+      case Some((_, idx)) => idx + add + 1 // first line in file has #1
       case None => -1
     }
   }
